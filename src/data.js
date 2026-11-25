@@ -55,3 +55,9 @@ export const LANG_COLORS = {
   HTML: '#e34c26',
   Shell: '#89e051',
 }
+
+export const PRIVATE_PROJECT_STATS = [
+  { platform: 'PC + сервер', icon: 'monitor', lines: 140242 },
+  { platform: 'Android', icon: 'phone', lines: 25741 },
+  { platform: 'iPhone', icon: 'phone', lines: 24453 },
+]

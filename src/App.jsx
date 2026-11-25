@@ -3,7 +3,7 @@ import Icon from './Icon.jsx'
 import Morph from './Morph.jsx'
 import useGitHub from './useGitHub.js'
 import useSectionSnap from './useSectionSnap.js'
-import { CONTACTS, GITHUB_URL, GITHUB_USER, LANG_COLORS, LANGS, PROFILE, PROJECTS_LIMIT, STACK, TEAM } from './data.js'
+import { CONTACTS, GITHUB_URL, GITHUB_USER, LANG_COLORS, LANGS, PROFILE, PRIVATE_PROJECT_STATS, PROJECTS_LIMIT, STACK, TEAM } from './data.js'
 
 const EXT = { target: '_blank', rel: 'noopener noreferrer' }
 const SECTIONS = [
@@ -113,6 +113,7 @@ function Hero() {
   )
 }
 
+const lineCount = new Intl.NumberFormat('ru')
 const pluralRules = new Intl.PluralRules('ru')
 const plural = (n, one, few, many) => ({ one, few, many })[pluralRules.select(n)] || few
 
@@ -140,16 +141,37 @@ function Projects() {
     <section className="snap section projects" id="projects" data-snap aria-labelledby="projects-title">
       <SectionHead id="projects-title" index="01" tag="работы" title="Проекты" />
       <div className="projects-grid">
-        <a className="team-card sl" href={TEAM.url} {...EXT}>
-          <span className="team-shape" aria-hidden="true">
-            <Morph shapes={['cookie', 'flower', 'sunny']} spin={0.12} hold={2400} className="team-morph" />
-            <span className="team-glyph">{TEAM.name[0]}</span>
-          </span>
-          <span className="team-kicker">{TEAM.role} · команда</span>
-          <h3>{TEAM.name}</h3>
-          <p>{TEAM.about}</p>
-          <span className="filled-btn">{TEAM.label}<Icon n="arrow" s={18} /></span>
-        </a>
+        <div className="project-feature">
+          <a className="team-card sl" href={TEAM.url} {...EXT}>
+            <span className="team-shape" aria-hidden="true">
+              <Morph shapes={['cookie', 'flower', 'sunny']} spin={0.12} hold={2400} className="team-morph" />
+              <span className="team-glyph">{TEAM.name[0]}</span>
+            </span>
+            <span className="team-kicker">{TEAM.role} · команда</span>
+            <h3>{TEAM.name}</h3>
+            <p>{TEAM.about}</p>
+            <span className="filled-btn">{TEAM.label}<Icon n="arrow" s={18} /></span>
+          </a>
+          <div className="repos-card private-project">
+            <div className="card-head">
+              <h3 className="title">Приватный реп</h3>
+            </div>
+            <ul className="group">
+              {PRIVATE_PROJECT_STATS.map(({ platform, icon, lines }) => (
+                <li key={platform}>
+                  <div className="m3-row">
+                    <span className="tile"><Icon n={icon} s={22} /></span>
+                    <span className="row-text">
+                      <span className="row-name">{platform}</span>
+                      <span className="row-sub">{lineCount.format(lines)} {plural(lines, 'строка', 'строки', 'строк')} кода</span>
+                    </span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <p className="sub">Android и iPhone используют общий код Flutter.</p>
+          </div>
+        </div>
         <div className="repos-card">
           <div className="card-head">
             <div>

@@ -216,6 +216,9 @@ a.card:hover { border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
 /* Проекты — Material 3 Expressive в духе Riff: тональные поверхности без рамок,
    группа строк (внутренние углы 6px, внешние 22px), state layer и jelly-пружина */
 .projects-grid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 16px; }
+.project-feature { min-width: 0; display: flex; flex-direction: column; gap: 16px; }
+.project-feature > .team-card { flex: 1; min-height: 0; }
+.private-project > .sub { margin-top: 12px; }
 .sl { position: relative; isolation: isolate; overflow: hidden; }
 .sl::after { content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: var(--on-surface); opacity: 0; pointer-events: none; transition: opacity var(--hover-out) var(--emph); }
 .sl:hover::after { opacity: .08; transition-duration: var(--hover-in); }
